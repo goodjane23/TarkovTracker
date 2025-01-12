@@ -1,11 +1,24 @@
+using Microsoft.Build.Execution;
+using Microsoft.EntityFrameworkCore;
 using System.Xml.Linq;
 using TarkovTracker.Controllers;
+using TarkovTracker.Data;
+using TarkovTracker.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<AppDbContext>((options) =>
+{
+    options.UseNpgsql(builder.Configuration.GetConnectionString("TrackerDB"));
+} );
 
+builder.Services.AddScoped<TarkovApiService>();
+builder.Services.AddScoped<TrackerService>();
+
+builder.Services.AddHostedService()
+//builder.Services.AddDbContext<>;
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -3,5 +3,4 @@
 public class UserRequirementsItem : ItemRequirements
 {
     public int СollectedItemsCount { get; set; }
-    
 }
