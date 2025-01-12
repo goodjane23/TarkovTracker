@@ -7,18 +7,23 @@ using TarkovTracker.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<AppDbContext>((options) =>
+var services = builder.Services;
+var configuration = builder.Configuration;
+
+services.AddControllersWithViews();
+
+services.AddDbContextFactory<AppDbContext>(options =>
 {
-    options.UseNpgsql(builder.Configuration.GetConnectionString("TrackerDB"));
-} );
+    options.UseNpgsql(configuration.GetConnectionString("TrackerDB"));
+});
 
-builder.Services.AddScoped<TarkovApiService>();
-builder.Services.AddScoped<TrackerService>();
+services.AddSingleton<TarkovApiService>();
+services.AddSingleton<TrackerService>();
 
-builder.Services.AddHostedService()
-//builder.Services.AddDbContext<>;
+services.AddHttpClient();
+
+services.AddHostedService<StartupService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -35,10 +40,6 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
-
-app.MapControllerRoute
-    (name: "/tarkovtracker",
-    pattern: "{controller=Tarkov}/{action=Index}");
 
 app.MapControllerRoute(
     name: "default",
