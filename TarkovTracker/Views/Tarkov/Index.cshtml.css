@@ -1,0 +1,50 @@
+﻿body {
+    background-color:black;
+}
+
+.btn {
+    border-radius: 0px;
+    background-color: transparent;
+    color: #9a8866;
+    border: none;
+    font-size: 40px;
+    align-content:center;
+
+}
+
+p {
+    color: #aeaeb0;
+    font-size: 30px;
+    margin:3px;
+    align-content:center;
+}
+
+.item {
+    background: #1a1a1a;
+    border-radius: 25px;
+    padding: 5px;
+    margin: 5px;
+    justify-items:stretch;
+}
+h3 {
+    color: #9a8866;
+}
+
+.item-list {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    background-color: black;
+    padding: 10px;
+}
+
+.container > div {
+    background-color: black;
+    border: 1px solid black;
+    padding: 10px;
+    font-size: 30px;
+    text-align: center;
+}
+
+.data {
+   justify-content:right;
+}
