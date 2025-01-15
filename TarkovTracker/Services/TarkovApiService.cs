@@ -5,10 +5,18 @@ namespace TarkovTracker.Services;
 
 public class TarkovApiService 
 {
+    private readonly IHttpClientFactory httpClientFactory;
+
+    public TarkovApiService(IHttpClientFactory httpClientFactory)
+    {
+        this.httpClientFactory = httpClientFactory;
+    }
+    
     public async Task<IEnumerable<ItemRequirements>> GetShelterItems()
     {
         var finalItems = new List<ItemRequirements>();
-        var data = new Dictionary<string, string>()
+        
+        var data = new Dictionary<string, string>
         {
             {"query", "{hideoutStations " +
             "{ id name normalizedName levels " +
@@ -17,26 +25,27 @@ public class TarkovApiService
             "}}}"}
         };
 
-        using var httpClient = new HttpClient();
-
-        //Http response message
+        using var httpClient = httpClientFactory.CreateClient();
+        
         var httpResponse = await httpClient.PostAsJsonAsync("https://api.tarkov.dev/graphql", data);
-
-        //Response content
         var responseContent = await httpResponse.Content.ReadAsStringAsync();
 
-        var options = new JsonSerializerOptions();
-        options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+        var options = new JsonSerializerOptions
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+        };
+        
         var hideout = JsonSerializer.Deserialize<ApiResponse>(responseContent, options);
-
-        //Пролучаем список всех ItemRequirements
-
-        var hideoutStationLevels = hideout.Data.HideoutStations.SelectMany(x => x.Levels);
-        var items = hideoutStationLevels.SelectMany(x => x.ItemRequirements).ToList();
+        
+        var items = hideout.Data.HideoutStations
+            .SelectMany(x => x.Levels)
+            .SelectMany(x => x.ItemRequirements)
+            .ToList();
 
         foreach (var item in items)
         {
             var existItem = finalItems.FirstOrDefault(x => x.Item.Id.Equals(item.Item.Id));
+            
             if (existItem != null)
             {
                 existItem.Count += item.Count;
@@ -44,8 +53,9 @@ public class TarkovApiService
             else
             {
                 finalItems.Add(item);
-            };
+            }
         }
+        
         return items;
     }
 }

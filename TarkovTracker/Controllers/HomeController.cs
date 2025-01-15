@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using TarkovTracker.Data.Entities;
 using TarkovTracker.Models;
 
 namespace TarkovTracker.Controllers;
+
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
