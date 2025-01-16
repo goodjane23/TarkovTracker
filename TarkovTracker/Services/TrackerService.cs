@@ -40,16 +40,16 @@ public class TrackerService
         
         await dbContext.SaveChangesAsync();
     }
-    
+
     public async Task DecreaseCount(string id)
     {
         await using var dbContext = await dbContextFactory.CreateDbContextAsync();
-        
+
         var item = await dbContext.UserItems
             .Where(x => x.Id == id)
             .FirstOrDefaultAsync();
-        
-        if (item == null)
+
+        if (item == null || item.СollectedCount == 0)
             return;
 
         item.СollectedCount--;

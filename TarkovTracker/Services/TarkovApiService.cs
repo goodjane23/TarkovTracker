@@ -18,10 +18,10 @@ public class TarkovApiService
         
         var data = new Dictionary<string, string>
         {
-            {"query", "{hideoutStations " +
+            {"query", "{hideoutStations(lang: ru) " +
             "{ id name normalizedName levels " +
             "{ id level itemRequirements" +
-            "{ id count quantity item { id normalizedName description image512pxLink}}" +
+            "{ id count quantity item { id name description image512pxLink}}" +
             "}}}"}
         };
 
@@ -44,7 +44,7 @@ public class TarkovApiService
 
         foreach (var item in items)
         {
-            var existItem = finalItems.FirstOrDefault(x => x.Item.Id.Equals(item.Item.Id));
+            var existItem = finalItems.FirstOrDefault(x => x.Item.Name.Equals(item.Item.Name));
             
             if (existItem != null)
             {
@@ -56,6 +56,6 @@ public class TarkovApiService
             }
         }
         
-        return items;
+        return finalItems;
     }
 }

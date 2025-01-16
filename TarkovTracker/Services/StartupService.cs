@@ -31,7 +31,7 @@ public class StartupService : IHostedService
             Description = x.Item.Description,
             Quantity = x.Quantity,
             Image512pxLink = x.Item.Image512pxLink,
-            NormalizedName = x.Item.NormalizedName,
+            NormalizedName = x.Item.Name,
             RequiredCount = x.Count
         });
         

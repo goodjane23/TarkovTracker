@@ -1,22 +1,23 @@
 ﻿@using TarkovTracker.Data.Entities
 @model IEnumerable<UserDataItem>
 
-<h2>Список элементов</h2>
+<h2>Трекер предметов</h2>
 
 <div class="item-list">
     @foreach (var item in Model)
     {
         <div class="item">
             <h3>@item.NormalizedName</h3>
-
+            <div class="picData">
             <img src="@item.Image512pxLink" width="124" height="124">
 
-            <div class="data" style='display:inline-flex'>
+            <div class="data" >
                 <a class="btn btn-primary" href="@Url.Action("DoMinusItem", "Tarkov", new { id = item.Id })">-</a>
                 <p>@item.СollectedCount</p>
                 <p>/</p>
                 <p>@item.RequiredCount</p>
                 <a class="btn btn-primary" href="@Url.Action("DoPlusItem", "Tarkov", new { id = item.Id })">+</a>
+            </div>
             </div>
         </div>
     }

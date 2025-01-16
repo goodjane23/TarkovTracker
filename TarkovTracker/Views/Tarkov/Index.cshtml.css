@@ -1,6 +1,9 @@
 ﻿body {
-    background: black;
-    color:black;
+}
+
+h2 {
+    color: #9a8866;
+    margin: 30px;
 }
 
 .btn {
@@ -15,7 +18,6 @@
 p {
     color: #aeaeb0;
     font-size: 30px;
-    margin:3px;
     align-content:center;
 }
 
@@ -24,9 +26,9 @@ p {
     border-radius: 25px;
     padding: 5px;
     margin: 5px;
-    justify-items:stretch;
 }
 h3 {
+    margin: 8px;
     color: #9a8866;
 }
 
@@ -37,15 +39,18 @@ h3 {
     padding: 10px;
 }
 
-
-.container > div {
-    background-color: black;
-    border: 1px solid black;
-    padding: 10px;
-    font-size: 30px;
-    text-align: center;
+img {
+    display: block;
+}
+.picData {
+    display: flex;
+    flex-direction: row;
 }
 
 .data {
-   justify-content:right;
+    vertical-align: central;
+    display: flex;
+    flex-direction: row;
+    margin-left: auto;
+    margin-right: 0;
 }
