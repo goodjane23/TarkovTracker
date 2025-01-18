@@ -1,0 +1,16 @@
+﻿@model TarkovTracker.Data.Entities.UserDataItem
+
+<h3>@Model.NormalizedName</h3>
+<div class="picData">
+    <img src="@Model.Image512pxLink" width="124" height="124">
+
+    <div class="data">
+        <a class="btn btn-primary" href="@Url.Action("DoMinusItem", "Tarkov", new { id = Model.Id })">-</a>
+
+        <p>@Model.СollectedCount</p>
+        <p>/</p>
+        <p>@Model.RequiredCount</p>
+        
+        <a class="btn btn-primary" href="@Url.Action("DoPlusItem", "Tarkov", new { id = Model.Id })">+</a>
+    </div>
+</div>
