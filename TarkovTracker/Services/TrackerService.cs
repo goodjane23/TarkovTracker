@@ -25,6 +25,18 @@ public class TrackerService
         return items;
     }
 
+    public async Task<UserDataItem?> GetById(string id)
+    {
+        await using var dbContext = await dbContextFactory.CreateDbContextAsync();
+
+        var item = await dbContext.UserItems
+            .AsNoTracking()
+            .Where(x => x.Id == id)
+            .FirstOrDefaultAsync();
+        
+        return item;
+    }
+
     public async Task IncreaseCount(string id)
     {
         await using var dbContext = await dbContextFactory.CreateDbContextAsync();

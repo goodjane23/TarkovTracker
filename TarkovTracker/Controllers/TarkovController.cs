@@ -31,6 +31,15 @@ public class TarkovController : Controller
 
         return View("Index", items);
     }
+    
+    [HttpGet]
+    public async Task<ActionResult> DoMinusItemPartial(string id)
+    {
+        await trackerService.DecreaseCount(id);
+        var item = await trackerService.GetById(id);
+
+        return PartialView("_TrackerItem", item);
+    }
 
     [HttpGet]
     public async Task<ActionResult> DoPlusItem(string id)
