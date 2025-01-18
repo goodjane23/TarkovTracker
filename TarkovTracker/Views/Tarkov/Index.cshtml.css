@@ -11,14 +11,16 @@ h2 {
     background-color: transparent;
     color: #9a8866;
     border: none;
-    font-size: 40px;
+    font-size: 30px;
     align-content:center;
+    height:100px;
 }
 
 p {
     color: #aeaeb0;
     font-size: 30px;
-    align-content:center;
+    align-content: center;
+    height: 100px;
 }
 
 .item {
@@ -53,4 +55,8 @@ img {
     flex-direction: row;
     margin-left: auto;
     margin-right: 0;
+}
+
+.textBlock{
+    
 }

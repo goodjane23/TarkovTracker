@@ -11,12 +11,14 @@
             <div class="picData">
             <img src="@item.Image512pxLink" width="124" height="124">
 
-            <div class="data" >
+            <div class="data">
                 <a class="btn btn-primary" href="@Url.Action("DoMinusItem", "Tarkov", new { id = item.Id })">-</a>
+               
                 <p>@item.СollectedCount</p>
                 <p>/</p>
                 <p>@item.RequiredCount</p>
-                <a class="btn btn-primary" href="@Url.Action("DoPlusItem", "Tarkov", new { id = item.Id })">+</a>
+               
+                    <a class="btn btn-primary" href="@Url.Action("DoPlusItem", "Tarkov", new { id = item.Id })" role="button" >+</a>
             </div>
             </div>
         </div>
