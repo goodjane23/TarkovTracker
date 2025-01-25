@@ -13,3 +13,38 @@
         </div>
     }
 </div>
+
+<script>
+    function increaseItem(id) {
+        $.ajax({
+            url: '@Url.Action("IncreasePartial", "Tarkov")',
+            type: 'GET',
+            data: {
+                "id": id,
+            },
+            success: function(item) {
+                document.getElementById(id).innerHTML = item;
+            },
+            error: function() {
+                alert('Fail to load user item')
+            }
+        });
+    }
+    
+    function decreaseItem(id) {
+        $.ajax({
+            url: '@Url.Action("DecreasePartial", "Tarkov")',
+            type: 'GET',
+            data: {
+                "id": id,
+            },
+            success: function(item) {
+                document.getElementById(id).innerHTML = item;
+            },
+            error: function() {
+                alert('Fail to load user item')
+            }
+        });
+    }
+
+</script>

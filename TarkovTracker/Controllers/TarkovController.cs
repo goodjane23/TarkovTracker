@@ -22,31 +22,22 @@ public class TarkovController : Controller
         var items = await trackerService.GetAllItems();
         return View(items);
     }
-
-    [HttpGet]
-    public async Task<ActionResult> DoMinusItem(string id)
-    {
-        await trackerService.DecreaseCount(id);
-        var items = await trackerService.GetAllItems();
-
-        return View("Index", items);
-    }
     
     [HttpGet]
-    public async Task<ActionResult> DoMinusItemPartial(string id)
+    public async Task<ActionResult> DecreasePartial([FromQuery] string id)
     {
         await trackerService.DecreaseCount(id);
         var item = await trackerService.GetById(id);
 
         return PartialView("_TrackerItem", item);
     }
-
+    
     [HttpGet]
-    public async Task<ActionResult> DoPlusItem(string id)
+    public async Task<ActionResult> IncreasePartial([FromQuery] string id)
     {
         await trackerService.IncreaseCount(id);
-        var items = await trackerService.GetAllItems();
+        var item = await trackerService.GetById(id);
 
-        return View("Index", items);
+        return PartialView("_TrackerItem", item);
     }
 }

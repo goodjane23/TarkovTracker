@@ -5,12 +5,12 @@
     <img src="@Model.Image512pxLink" width="124" height="124">
 
     <div class="data">
-        <a class="btn btn-primary" href="@Url.Action("DoMinusItem", "Tarkov", new { id = Model.Id })">-</a>
+        <a class="btn btn-primary" onclick="decreaseItem('@Model.Id')">-</a>
 
         <p>@Model.СollectedCount</p>
         <p>/</p>
         <p>@Model.RequiredCount</p>
         
-        <a class="btn btn-primary" href="@Url.Action("DoPlusItem", "Tarkov", new { id = Model.Id })">+</a>
+        <a class="btn btn-primary" onclick="increaseItem('@Model.Id')">+</a>
     </div>
 </div>
