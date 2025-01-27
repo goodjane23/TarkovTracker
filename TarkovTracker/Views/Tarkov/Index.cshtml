@@ -17,10 +17,10 @@
 <script>
     function increaseItem(id) {
         $.ajax({
-            url: '@Url.Action("IncreasePartial", "Tarkov")',
-            type: 'GET',
+            url: '@Url.Action("IncreaseCount", "Tarkov")',
+            type: 'POST',
             data: {
-                "id": id,
+                "itemId": id,
             },
             success: function(item) {
                 document.getElementById(id).innerHTML = item;
@@ -33,10 +33,10 @@
     
     function decreaseItem(id) {
         $.ajax({
-            url: '@Url.Action("DecreasePartial", "Tarkov")',
-            type: 'GET',
+            url: '@Url.Action("DecreaseCount", "Tarkov")',
+            type: 'POST',
             data: {
-                "id": id,
+                "itemId": id,
             },
             success: function(item) {
                 document.getElementById(id).innerHTML = item;

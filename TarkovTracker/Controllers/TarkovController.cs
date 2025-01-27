@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Text.Json;
+using TarkovTracker.Controllers.Models;
 using TarkovTracker.Data.Entities;
 using TarkovTracker.Models;
 using TarkovTracker.Services;
@@ -23,20 +24,20 @@ public class TarkovController : Controller
         return View(items);
     }
     
-    [HttpGet]
-    public async Task<ActionResult> DecreasePartial([FromQuery] string id)
+    [HttpPost]
+    public async Task<ActionResult> DecreaseCount(ChangeItemCountRequest request)
     {
-        await trackerService.DecreaseCount(id);
-        var item = await trackerService.GetById(id);
+        await trackerService.DecreaseCount(request.ItemId);
+        var item = await trackerService.GetById(request.ItemId);
 
         return PartialView("_TrackerItem", item);
     }
     
-    [HttpGet]
-    public async Task<ActionResult> IncreasePartial([FromQuery] string id)
+    [HttpPost]
+    public async Task<ActionResult> IncreaseCount(ChangeItemCountRequest request)
     {
-        await trackerService.IncreaseCount(id);
-        var item = await trackerService.GetById(id);
+        await trackerService.IncreaseCount(request.ItemId);
+        var item = await trackerService.GetById(request.ItemId);
 
         return PartialView("_TrackerItem", item);
     }
